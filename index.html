@@ -751,6 +751,206 @@
         </div>
     </div>
 
+    <!-- Add Masjid Modal -->
+    <div class="modal" id="masjid-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Masjid</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="masjid-form">
+                    <input type="hidden" id="masjid-id">
+                    <div class="form-group">
+                        <label for="masjid-name" class="form-label">Masjid Name</label>
+                        <input type="text" id="masjid-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="masjid-address" class="form-label">Address</label>
+                        <textarea id="masjid-address" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="masjid-imam" class="form-label">Imam Name</label>
+                        <input type="text" id="masjid-imam" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="masjid-contact" class="form-label">Contact Number</label>
+                        <input type="tel" id="masjid-contact" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="masjid-fajr" class="form-label">Fajr Time</label>
+                        <input type="time" id="masjid-fajr" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="masjid-dhuhr" class="form-label">Dhuhr Time</label>
+                        <input type="time" id="masjid-dhuhr" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="masjid-asr" class="form-label">Asr Time</label>
+                        <input type="time" id="masjid-asr" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="masjid-maghrib" class="form-label">Maghrib Time</label>
+                        <input type="time" id="masjid-maghrib" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="masjid-isha" class="form-label">Isha Time</label>
+                        <input type="time" id="masjid-isha" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-masjid">Cancel</button>
+                <button class="btn btn-primary" id="save-masjid">Save Masjid</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Jamaat Modal -->
+    <div class="modal" id="jamaat-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Jamaat</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="jamaat-form">
+                    <input type="hidden" id="jamaat-id">
+                    <div class="form-group">
+                        <label for="jamaat-duration" class="form-label">Duration</label>
+                        <select id="jamaat-duration" class="form-control" required>
+                            <option value="">Select Duration</option>
+                            <option value="3">3 Days</option>
+                            <option value="10">10 Days</option>
+                            <option value="40">40 Days</option>
+                            <option value="120">4 Months</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jamaat-start-date" class="form-label">Start Date</label>
+                        <input type="date" id="jamaat-start-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jamaat-end-date" class="form-label">End Date</label>
+                        <input type="date" id="jamaat-end-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jamaat-masjid" class="form-label">Assigned Masjid</label>
+                        <select id="jamaat-masjid" class="form-control" required>
+                            <option value="">Select Masjid</option>
+                            <option value="1">Masjid Al-Huda</option>
+                            <option value="2">Masjid Al-Noor</option>
+                            <option value="3">Masjid Al-Falah</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jamaat-members" class="form-label">Members (comma separated)</label>
+                        <textarea id="jamaat-members" class="form-control" rows="3" placeholder="Enter member names separated by commas" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="jamaat-amir" class="form-label">Amir Name</label>
+                        <input type="text" id="jamaat-amir" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jamaat-notes" class="form-label">Notes</label>
+                        <textarea id="jamaat-notes" class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-jamaat">Cancel</button>
+                <button class="btn btn-primary" id="save-jamaat">Save Jamaat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add A'maal Modal -->
+    <div class="modal" id="amaal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Daily A'maal</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="amaal-form">
+                    <input type="hidden" id="amaal-id">
+                    <input type="hidden" id="amaal-type">
+                    <div class="form-group">
+                        <label for="amaal-date" class="form-label">Date</label>
+                        <input type="date" id="amaal-date" class="form-control" required>
+                    </div>
+                    <div class="form-group" id="taaleem-topic-group">
+                        <label for="taaleem-topic" class="form-label">Fajr Taaleem Topic</label>
+                        <input type="text" id="taaleem-topic" class="form-control">
+                    </div>
+                    <div class="form-group" id="bayan-summary-group">
+                        <label for="bayan-summary" class="form-label">Maghrib Bayan Summary</label>
+                        <textarea id="bayan-summary" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group" id="mashwara-notes-group">
+                        <label for="mashwara-notes" class="form-label">Mashwara Notes</label>
+                        <textarea id="mashwara-notes" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group" id="speaker-group">
+                        <label for="speaker-name" class="form-label">Speaker Name</label>
+                        <input type="text" id="speaker-name" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-amaal">Cancel</button>
+                <button class="btn btn-primary" id="save-amaal">Save A'maal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal" id="user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New User</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="user-form">
+                    <input type="hidden" id="user-id">
+                    <div class="form-group">
+                        <label for="user-name" class="form-label">Full Name</label>
+                        <input type="text" id="user-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email" class="form-label">Email</label>
+                        <input type="email" id="user-email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-role" class="form-label">Role</label>
+                        <select id="user-role" class="form-control" required>
+                            <option value="">Select Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="amir">Amir</option>
+                            <option value="member">Member</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password" class="form-label">Password</label>
+                        <input type="password" id="user-password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-status" class="form-label">Status</label>
+                        <select id="user-status" class="form-control" required>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-user">Cancel</button>
+                <button class="btn btn-primary" id="save-user">Save User</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Add this just before the closing body tag -->
     <footer class="site-footer">
         <div class="footer-container">
