@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Raah-e-Tabligh is a spiritual platform dedicated to spreading the peaceful message of Islam, offering authentic Islamic content, guidance, and resources to strengthen Imaan and knowledge.">
+    <meta name="keywords"
+        content="Islam, Tabligh, Da'wah, Islamic guidance, Quran, Hadith, Imaan, Islamic website, Raah-e-Tabligh">
+    <meta name="author" content="Raah-e-Tabligh Team">
     <title>Tabligh Jamaat Management System</title>
+    <link rel="icon" type="png" href="/photos/67bd2425c2205-removebg-preview.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
     <header>
         <div class="header-title">
@@ -48,6 +56,14 @@
                 <div class="nav-item" data-section="users">
                     <i class="fas fa-user-cog nav-icon"></i>
                     <span class="nav-text">User Management</span>
+                </div>
+                <div class="nav-item" data-section="about">
+                    <i class="fas fa-info-circle nav-icon"></i>
+                    <span class="nav-text">About Tabligh</span>
+                </div>
+                <div class="nav-item" data-section="contact">
+                    <i class="fas fa-envelope nav-icon"></i>
+                    <span class="nav-text">Contact Us</span>
                 </div>
             </div>
         </div>
@@ -309,14 +325,14 @@
                         <i class="fas fa-plus"></i> Add Daily Report
                     </button>
                 </div>
-                
+
                 <div class="tab-container">
                     <div class="tabs">
                         <div class="tab active" data-tab="fajr">Fajr Taaleem</div>
                         <div class="tab" data-tab="maghrib">Maghrib Bayan</div>
                         <div class="tab" data-tab="mashwara">Mashwara</div>
                     </div>
-                    
+
                     <div class="tab-content active" id="fajr-tab">
                         <table>
                             <thead>
@@ -361,7 +377,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <div class="tab-content" id="maghrib-tab">
                         <table>
                             <thead>
@@ -391,7 +407,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <div class="tab-content" id="mashwara-tab">
                         <table>
                             <thead>
@@ -427,7 +443,7 @@
                 <div class="section-header">
                     <h3 class="section-title">Analytics</h3>
                 </div>
-                
+
                 <div class="dashboard-cards">
                     <div class="card">
                         <div class="card-header">
@@ -452,7 +468,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="section">
                     <div class="section-header">
                         <h3 class="section-title">Most Active Masajid</h3>
@@ -517,209 +533,270 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- About Tabligh Jamaat Section -->
+            <div class="content-section" id="about-section">
+                <div class="about-content">
+                    <div class="section">
+                        <h1 class="section-title">About Tabligh Jamaat</h1>
+                        <p>Tabligh Jamaat is a global Islamic missionary movement that focuses on urging Muslims to
+                            return to primary Sunni Islam, particularly in matters of ritual, dress, and personal
+                            behavior.</p>
+                    </div>
+
+                    <div class="section about-section">
+                        <h2>History</h2>
+                        <p>The Tabligh Jamaat movement was founded in 1926 by Muhammad Ilyas al-Kandhlawi in Mewat,
+                            India. The movement began as an effort to reform Muslims who had converted from Hinduism but
+                            were still practicing many Hindu customs.</p>
+
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">1926</div>
+                                <div class="timeline-content">
+                                    <p>Founded by Maulana Muhammad Ilyas Kandhlawi in Mewat region of India with the aim
+                                        of encouraging Muslims to practice their religion more diligently.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">1944</div>
+                                <div class="timeline-content">
+                                    <p>After the death of Muhammad Ilyas, leadership passed to his son Muhammad Yusuf
+                                        Kandhlawi who expanded the movement internationally.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">1965</div>
+                                <div class="timeline-content">
+                                    <p>The movement established its international headquarters in Nizamuddin, Delhi,
+                                        India.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Present</div>
+                                <div class="timeline-content">
+                                    <p>Tabligh Jamaat has grown to become one of the largest Islamic movements in the
+                                        world with followers in over 150 countries.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section about-section">
+                        <h2>Principles and Methodology</h2>
+                        <p>The Tabligh Jamaat follows six fundamental principles derived from the lives of the
+                            companions of the Prophet Muhammad (PBUH). These principles form the core of their teachings
+                            and activities:</p>
+
+                        <div class="principles-grid">
+                            <div class="principle-card">
+                                <h3><i class="fas fa-certificate"></i> Kalimah</h3>
+                                <p>The declaration of faith (Shahada) - understanding its meaning and living by it.</p>
+                            </div>
+                            <div class="principle-card">
+                                <h3><i class="fas fa-pray"></i> Salah</h3>
+                                <p>Praying five times a day with congregation (jama'ah) in the mosque whenever possible.
+                                </p>
+                            </div>
+                            <div class="principle-card">
+                                <h3><i class="fas fa-book"></i> Ilm & Dhikr</h3>
+                                <p>Acquiring knowledge of Islam and remembering Allah through daily practices.</p>
+                            </div>
+                            <div class="principle-card">
+                                <h3><i class="fas fa-hands-helping"></i> Ikram-e-Muslim</h3>
+                                <p>Honoring and respecting fellow Muslims with good character and conduct.</p>
+                            </div>
+                            <div class="principle-card">
+                                <h3><i class="fas fa-heart"></i> Ikhlas-e-Niyyat</h3>
+                                <p>Sincerity of intention - reforming one's life in accordance with Islamic teachings.
+                                </p>
+                            </div>
+                            <div class="principle-card">
+                                <h3><i class="fas fa-clock"></i> Dawat-o-Tabligh</h3>
+                                <p>Devoting time to go out in the path of Allah to spread His message.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section about-section">
+                        <h2>Activities</h2>
+                        <p>Tabligh Jamaat organizes various activities to fulfill its mission of encouraging Muslims to
+                            practice their faith:</p>
+                        <ul>
+                            <li><strong>Gasht (Visitation):</strong> Small groups visit Muslim homes and mosques to
+                                invite them to religious gatherings.</li>
+                            <li><strong>Ta'lim (Teaching):</strong> Daily reading from Islamic texts, particularly
+                                Faza'il-e-A'maal.</li>
+                            <li><strong>Jamaat (Group):</strong> Formation of groups that travel locally or
+                                internationally for specified periods (3 days, 40 days, 4 months).</li>
+                            <li><strong>Ijtema (Gathering):</strong> Large annual gatherings where Muslims from
+                                different regions come together.</li>
+                            <li><strong>Khuruj (Going Out):</strong> The practice of leaving one's home and comforts to
+                                spend time in the path of Allah.</li>
+                        </ul>
+                    </div>
+
+                    <div class="section about-section">
+                        <h2>Organizational Structure</h2>
+                        <p>Tabligh Jamaat operates with a decentralized structure:</p>
+                        <ul>
+                            <li><strong>Markaz (Center):</strong> Each country or region has a central mosque that
+                                coordinates activities.</li>
+                            <li><strong>Shura (Consultation):</strong> Decisions are made through consultation among
+                                senior members.</li>
+                            <li><strong>Amir (Leader):</strong> Each jamaat (group) has an appointed leader for the
+                                duration of their trip.</li>
+                            <li><strong>Mashwara (Discussion):</strong> Daily meetings where activities are planned and
+                                issues discussed.</li>
+                        </ul>
+                        <p>The movement avoids formal hierarchy and emphasizes personal responsibility.</p>
+                    </div>
+
+                    <div class="section about-section">
+                        <h2>Impact and Reach</h2>
+                        <p>Tabligh Jamaat has had significant influence on Muslim communities worldwide:</p>
+                        <ul>
+                            <li>Estimated millions of participants worldwide</li>
+                            <li>Active in over 150 countries</li>
+                            <li>Annual gatherings attract millions of participants (Bishwa Ijtema in Bangladesh is the
+                                second largest Muslim gathering after Hajj)</li>
+                            <li>Known for its emphasis on personal reformation rather than political activism</li>
+                            <li>Has inspired many Muslims to become more practicing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add this to your HTML file, ideally in the main content area where you want the contact form to appear -->
+            <div class="content-section" id="contact-section">
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Contact Us</h2>
+                    </div>
+
+                    <div class="contact-container">
+                        <div class="contact-info">
+                            <h3><i class="fas fa-info-circle"></i> Contact Information</h3>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Headquarters Address</h4>
+                                    <p>Markaz Masjid, Nizamuddin West, New Delhi, India</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Phone Number</h4>
+                                    <p>+91 11 2435 1234</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email Address</h4>
+                                    <p>info@tablighijamaat.org</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <h4>Office Hours</h4>
+                                    <p>Monday - Saturday: 8:00 AM - 8:00 PM</p>
+                                    <p>Friday: 1:00 PM - 8:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-form">
+                            <h3><i class="fas fa-paper-plane"></i> Send Us a Message</h3>
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <label for="contact-name" class="form-label">Your Name</label>
+                                    <input type="text" id="contact-name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-email" class="form-label">Email Address</label>
+                                    <input type="email" id="contact-email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-phone" class="form-label">Phone Number</label>
+                                    <input type="tel" id="contact-phone" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-subject" class="form-label">Subject</label>
+                                    <select id="contact-subject" class="form-control" required>
+                                        <option value="">Select a subject</option>
+                                        <option value="general">General Inquiry</option>
+                                        <option value="jamaat">Jamaat Information</option>
+                                        <option value="masjid">Masjid Registration</option>
+                                        <option value="donation">Donation Inquiry</option>
+                                        <option value="feedback">Feedback/Suggestions</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-message" class="form-label">Your Message</label>
+                                    <textarea id="contact-message" class="form-control" rows="5" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane"></i> Send Message
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Add Masjid Modal -->
-    <div class="modal" id="masjid-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Add New Masjid</h3>
-                <button class="modal-close">&times;</button>
+    <!-- Add this just before the closing body tag -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4><i class="fas fa-mosque"></i> Tabligh Jamaat</h4>
+                <p>Dedicated to serving the Muslim community through dawah and spiritual development since 1926.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
-            <div class="modal-body">
-                <form id="masjid-form">
-                    <input type="hidden" id="masjid-id">
-                    <div class="form-group">
-                        <label for="masjid-name" class="form-label">Masjid Name</label>
-                        <input type="text" id="masjid-name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="masjid-address" class="form-label">Address</label>
-                        <textarea id="masjid-address" class="form-control" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="masjid-imam" class="form-label">Imam Name</label>
-                        <input type="text" id="masjid-imam" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="masjid-contact" class="form-label">Contact Number</label>
-                        <input type="tel" id="masjid-contact" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="masjid-fajr" class="form-label">Fajr Time</label>
-                        <input type="time" id="masjid-fajr" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="masjid-dhuhr" class="form-label">Dhuhr Time</label>
-                        <input type="time" id="masjid-dhuhr" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="masjid-asr" class="form-label">Asr Time</label>
-                        <input type="time" id="masjid-asr" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="masjid-maghrib" class="form-label">Maghrib Time</label>
-                        <input type="time" id="masjid-maghrib" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="masjid-isha" class="form-label">Isha Time</label>
-                        <input type="time" id="masjid-isha" class="form-control" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-masjid">Cancel</button>
-                <button class="btn btn-primary" id="save-masjid">Save Masjid</button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Add Jamaat Modal -->
-    <div class="modal" id="jamaat-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Add New Jamaat</h3>
-                <button class="modal-close">&times;</button>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#dashboard-section"><i class="fas fa-arrow-right"></i> Dashboard</a></li>
+                    <li><a href="#masajid-section"><i class="fas fa-arrow-right"></i> Masajid</a></li>
+                    <li><a href="#jamaat-section"><i class="fas fa-arrow-right"></i> Jamaat Schedule</a></li>
+                    <li><a href="#about-section"><i class="fas fa-arrow-right"></i> About Tabligh</a></li>
+                </ul>
             </div>
-            <div class="modal-body">
-                <form id="jamaat-form">
-                    <input type="hidden" id="jamaat-id">
-                    <div class="form-group">
-                        <label for="jamaat-duration" class="form-label">Duration</label>
-                        <select id="jamaat-duration" class="form-control" required>
-                            <option value="">Select Duration</option>
-                            <option value="3">3 Days</option>
-                            <option value="10">10 Days</option>
-                            <option value="40">40 Days</option>
-                            <option value="120">4 Months</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="jamaat-start-date" class="form-label">Start Date</label>
-                        <input type="date" id="jamaat-start-date" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="jamaat-end-date" class="form-label">End Date</label>
-                        <input type="date" id="jamaat-end-date" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="jamaat-masjid" class="form-label">Assigned Masjid</label>
-                        <select id="jamaat-masjid" class="form-control" required>
-                            <option value="">Select Masjid</option>
-                            <option value="1">Masjid Al-Huda</option>
-                            <option value="2">Masjid Al-Noor</option>
-                            <option value="3">Masjid Al-Falah</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="jamaat-members" class="form-label">Members (comma separated)</label>
-                        <textarea id="jamaat-members" class="form-control" rows="3" placeholder="Enter member names separated by commas" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="jamaat-amir" class="form-label">Amir Name</label>
-                        <input type="text" id="jamaat-amir" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="jamaat-notes" class="form-label">Notes</label>
-                        <textarea id="jamaat-notes" class="form-control" rows="3"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-jamaat">Cancel</button>
-                <button class="btn btn-primary" id="save-jamaat">Save Jamaat</button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Add A'maal Modal -->
-    <div class="modal" id="amaal-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Add Daily A'maal</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="amaal-form">
-                    <input type="hidden" id="amaal-id">
-                    <input type="hidden" id="amaal-type">
-                    <div class="form-group">
-                        <label for="amaal-date" class="form-label">Date</label>
-                        <input type="date" id="amaal-date" class="form-control" required>
-                    </div>
-                    <div class="form-group" id="taaleem-topic-group">
-                        <label for="taaleem-topic" class="form-label">Fajr Taaleem Topic</label>
-                        <input type="text" id="taaleem-topic" class="form-control">
-                    </div>
-                    <div class="form-group" id="bayan-summary-group">
-                        <label for="bayan-summary" class="form-label">Maghrib Bayan Summary</label>
-                        <textarea id="bayan-summary" class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="form-group" id="mashwara-notes-group">
-                        <label for="mashwara-notes" class="form-label">Mashwara Notes</label>
-                        <textarea id="mashwara-notes" class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="form-group" id="speaker-group">
-                        <label for="speaker-name" class="form-label">Speaker Name</label>
-                        <input type="text" id="speaker-name" class="form-control">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-amaal">Cancel</button>
-                <button class="btn btn-primary" id="save-amaal">Save A'maal</button>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> Markaz Nizamuddin, Delhi, India</li>
+                    <li><i class="fas fa-phone"></i> +91 11 2435 1234</li>
+                    <li><i class="fas fa-envelope"></i> contact@tablighmanagement.org</li>
+                </ul>
             </div>
         </div>
-    </div>
 
-    <!-- Add User Modal -->
-    <div class="modal" id="user-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Add New User</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="user-form">
-                    <input type="hidden" id="user-id">
-                    <div class="form-group">
-                        <label for="user-name" class="form-label">Full Name</label>
-                        <input type="text" id="user-name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-email" class="form-label">Email</label>
-                        <input type="email" id="user-email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-role" class="form-label">Role</label>
-                        <select id="user-role" class="form-control" required>
-                            <option value="">Select Role</option>
-                            <option value="admin">Admin</option>
-                            <option value="amir">Amir</option>
-                            <option value="member">Member</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-password" class="form-label">Password</label>
-                        <input type="password" id="user-password" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="user-status" class="form-label">Status</label>
-                        <select id="user-status" class="form-control" required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-user">Cancel</button>
-                <button class="btn btn-primary" id="save-user">Save User</button>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tabligh Jamaat Management System. All Rights Reserved.</p>
+            <p> Design by <a href="https://www.techbythouseef.in">TechByThouseef</a></p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a> |
+                <a href="#contact-section">Contact Us</a>
             </div>
         </div>
-    </div>
+    </footer>
 
     <script src="/script.js"></script>
 </body>
+
 </html>

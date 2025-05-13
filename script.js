@@ -1141,3 +1141,23 @@ function formatDate(dateString) {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
 }
+
+
+// Add this to your JavaScript section
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('contact-name').value;
+    const email = document.getElementById('contact-email').value;
+    const phone = document.getElementById('contact-phone').value;
+    const subject = document.getElementById('contact-subject').value;
+    const message = document.getElementById('contact-message').value;
+    
+    // Here you would typically send the data to a server
+    // For now, we'll just show an alert
+    alert(`Thank you, ${name}! Your message has been received. We will contact you soon at ${email}.`);
+    
+    // Reset the form
+    this.reset();
+});
