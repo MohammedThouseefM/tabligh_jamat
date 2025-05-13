@@ -1,522 +1,1143 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Navigation
-    const navLinks = document.querySelectorAll('.navbar a, .mobile-menu a');
-    const sections = document.querySelectorAll('.section');
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            
-            // Update active nav link
-            navLinks.forEach(navLink => navLink.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Show target section
-            sections.forEach(section => {
-                section.classList.remove('active');
-                if (section.id === targetId) {
-                    section.classList.add('active');
-                }
-            });
-            
-            // Close mobile menu if open
-            mobileMenu.classList.remove('active');
-        });
-    });
-    
-    mobileMenuBtn.addEventListener('click', function() {
-        mobileMenu.classList.toggle('active');
-    });
-    
-    // Initialize with dashboard active
-    document.querySelector('.navbar a[href="#dashboard"]').click();
-    
-    // User dropdown (placeholder functionality)
-    const userProfile = document.querySelector('.user-profile');
-    userProfile.addEventListener('click', function() {
-        alert('User profile dropdown would open here');
-    });
-    
-    // Modal functionality
-    const modals = document.querySelectorAll('.modal');
-    const closeModalBtns = document.querySelectorAll('.close-modal');
-    
-    // Masjid modal
-    const addMasjidBtn = document.getElementById('add-masjid-btn');
-    const masjidModal = document.getElementById('masjid-modal');
-    
-    addMasjidBtn.addEventListener('click', function() {
-        document.getElementById('modal-masjid-title').textContent = 'Add New Masjid';
-        document.getElementById('masjid-form').reset();
-        document.getElementById('masjid-id').value = '';
-        masjidModal.classList.add('active');
-    });
-    
-    // Jamaat modal
-    const addJamaatBtn = document.getElementById('add-jamaat-btn');
-    const jamaatModal = document.getElementById('jamaat-modal');
-    
-    addJamaatBtn.addEventListener('click', function() {
-        document.getElementById('modal-jamaat-title').textContent = 'Add New Jamaat';
-        document.getElementById('jamaat-form').reset();
-        document.getElementById('jamaat-id').value = '';
-        document.getElementById('jamaat-end-date').disabled = true;
-        
-        // Populate masjid dropdown (mock data)
-        const masjidSelect = document.getElementById('jamaat-masjid');
-        masjidSelect.innerHTML = '<option value="">Select Masjid</option>';
-        mockMasajid.forEach(masjid => {
-            const option = document.createElement('option');
-            option.value = masjid.id;
-            option.textContent = masjid.name;
-            masjidSelect.appendChild(option);
-        });
-        
-        jamaatModal.classList.add('active');
-    });
-    
-    // Close modals
-    closeModalBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            modals.forEach(modal => modal.classList.remove('active'));
-        });
-    });
-    
-    // Close modal when clicking outside
-    modals.forEach(modal => {
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
-    });
-    
-    // Tab functionality
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
-            
-            // Update active tab button
-            tabBtns.forEach(tabBtn => tabBtn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Show target tab content
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-                if (content.id === `${tabId}-tab`) {
-                    content.classList.add('active');
-                }
-            });
-        });
-    });
-    
-    // Jamaat duration date calculation
-    const jamaatDuration = document.getElementById('jamaat-duration');
-    const jamaatStartDate = document.getElementById('jamaat-start-date');
-    const jamaatEndDate = document.getElementById('jamaat-end-date');
-    
-    jamaatDuration.addEventListener('change', function() {
-        if (this.value && jamaatStartDate.value) {
-            calculateEndDate();
+// Sample data for the application
+let masajid = [
+    {
+        id: 1,
+        name: "chok masjid",
+        address: "small mosque street, pernambut",
+        imam: "saadi hazrat",
+        contact: "0234562789",
+        prayerTimes: {
+            fajr: "05:30",
+            dhuhr: "13:15",
+            asr: "16:30",
+            maghrib: "19:00",
+            isha: "20:15"
         }
-    });
-    
-    jamaatStartDate.addEventListener('change', function() {
-        if (jamaatDuration.value) {
-            calculateEndDate();
+    },
+    {
+        id: 1,
+        name: "choti masjid",
+        address: "small mosque street, pernambut",
+        imam: "Sheikh Abdullah",
+        contact: "0123456789",
+        prayerTimes: {
+            fajr: "05:30",
+            dhuhr: "13:15",
+            asr: "16:30",
+            maghrib: "19:00",
+            isha: "20:15"
         }
-    });
-    
-    function calculateEndDate() {
-        const duration = parseInt(jamaatDuration.value);
-        const startDate = new Date(jamaatStartDate.value);
-        const endDate = new Date(startDate);
-        endDate.setDate(startDate.getDate() + duration);
-        
-        const formattedDate = endDate.toISOString().split('T')[0];
-        jamaatEndDate.value = formattedDate;
-        jamaatEndDate.disabled = false;
+    },
+    {
+        id: 1,
+        name: "Masjid Al-Huda",
+        address: "123 Islamic Street, Makkah Town",
+        imam: "Sheikh Abdullah",
+        contact: "0123456789",
+        prayerTimes: {
+            fajr: "05:30",
+            dhuhr: "13:15",
+            asr: "16:30",
+            maghrib: "19:00",
+            isha: "20:15"
+        }
+    },
+    {
+        id: 2,
+        name: "Masjid An-Noor",
+        address: "456 Sunnah Avenue, Madinah City",
+        imam: "Sheikh Muhammad",
+        contact: "0987654321",
+        prayerTimes: {
+            fajr: "05:45",
+            dhuhr: "13:30",
+            asr: "16:45",
+            maghrib: "19:15",
+            isha: "20:30"
+        }
     }
-    
-    // Date selector for A'maal
-    const amaalDate = document.getElementById('amaal-date');
-    const prevDayBtn = document.getElementById('prev-day');
-    const nextDayBtn = document.getElementById('next-day');
-    
-    prevDayBtn.addEventListener('click', function() {
-        const currentDate = new Date(amaalDate.value);
-        currentDate.setDate(currentDate.getDate() - 1);
-        amaalDate.value = currentDate.toISOString().split('T')[0];
-    });
-    
-    nextDayBtn.addEventListener('click', function() {
-        const currentDate = new Date(amaalDate.value);
-        currentDate.setDate(currentDate.getDate() + 1);
-        amaalDate.value = currentDate.toISOString().split('T')[0];
-    });
-    
-    // Current date and time
-    function updateDateTime() {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        document.getElementById('current-time').textContent = timeString;
-        
-        // Islamic date placeholder (would use a proper Hijri date library in production)
-        const islamicMonths = ['Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 
-                              'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Sha\'ban', 
-                              'Ramadan', 'Shawwal', 'Dhu al-Qi\'dah', 'Dhu al-Hijjah'];
-        const islamicDate = `${now.getDate()} ${islamicMonths[now.getMonth()]} ${1445}`;
-        document.getElementById('current-date').textContent = islamicDate;
+];
+
+let jamaats = [
+    {
+        id: 1,
+        duration: 3,
+        startDate: "2024-07-01",
+        endDate: "2024-07-03",
+        masjidId: 2,
+        members: ["Ayaan",
+            "Fatima",
+            "Zayd",
+            "Aisha",
+            "Ibrahim",
+            "Maryam",
+            "Yusuf",
+            "Huda",
+            "Ali",
+            "Khadija"],
+        amir: "mohammed thousef",
+        notes: "Local jamaat for 3 days",
+        status: "completed"
+    },
+    {
+        id: 2,
+        duration: 3,
+        startDate: "2025-09-03",
+        endDate: "2025-09-06",
+        masjidId: 3,
+        members: ["Hassan",
+            "Sumayya",
+            "Omar",
+            "Safiya",
+            "Bilal",
+            "Rania",
+            "Salman",
+            "Noor"],
+        amir: "abdullah",
+        notes: "Local jamaat for 3 days",
+        status: "completed"
+    },
+    {
+        id: 3,
+        duration: 10,
+        startDate: "2025-10-01",
+        endDate: "2025-10-10",
+        masjidId: 4,
+        members: ["Amira",
+            "Khalid",
+            "Nadia",
+            "Faizan",
+            "Yasmin",
+            "Sami",
+            "Haleema"],
+        amir: "Ahmed ali",
+        notes: "Local jamaat for 3 days",
+        status: "active"
+    },
+    {
+        id: 4,
+        duration: 40,
+        startDate: "2025-11-01",
+        endDate: "2023-12-10",
+        masjidId: 3,
+        members: ["Aaliyah",
+            "Imran",
+            "Naima",
+            "Haroon",
+            "Bushra"],
+        amir: "Ahmed Khan",
+        notes: "Local jamaat for 3 days",
+        status: "active"
+    },
+    {
+        id: 5,
+        duration: 40,
+        startDate: "2026-01-01",
+        endDate: "2026-02-10",
+        masjidId: 1,
+        members: ["Sajida",
+            "Talha",
+            "Hafsa",
+            "Maaz",
+            "Aqsa",
+            "Junaid",
+            "Zainab",
+            "Ilyas",
+            "Ruqayyah"],
+        amir: "Abdul Rahman",
+        notes: "40 days khurooj to neighboring city",
+        status: "upcoming"
     }
-    
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
-    
-    // Charts
-    function initCharts() {
-        // Khurooj Duration Chart
-        const durationCtx = document.getElementById('khurooj-duration-chart').getContext('2d');
-        const durationChart = new Chart(durationCtx, {
-            type: 'pie',
-            data: {
-                labels: ['3 Days', '10 Days', '40 Days', '4 Months'],
-                datasets: [{
-                    data: [45, 30, 15, 10],
-                    backgroundColor: [
-                        '#4CAF50',
-                        '#2196F3',
-                        '#FF9800',
-                        '#9C27B0'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-        
-        // Monthly Khurooj Chart
-        const monthlyCtx = document.getElementById('monthly-khurooj-chart').getContext('2d');
-        const monthlyChart = new Chart(monthlyCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Jamaat Count',
-                    data: [12, 15, 10, 14, 18, 20, 15, 12, 10, 14, 16, 20],
-                    backgroundColor: '#2c786c',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-        
-        // Top Masajid Chart
-        const masajidCtx = document.getElementById('top-masajid-chart').getContext('2d');
-        const masajidChart = new Chart(masajidCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Masjid A', 'Masjid B', 'Masjid C', 'Masjid D', 'Others'],
-                datasets: [{
-                    data: [35, 25, 20, 15, 5],
-                    backgroundColor: [
-                        '#2c786c',
-                        '#004445',
-                        '#f8b400',
-                        '#ff7e5f',
-                        '#faf5e4'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
+];
+
+let amaal = {
+    fajrTaaleem: [
+        {
+            id: 1,
+            date: "2023-06-15",
+            topic: "Importance of Dawah",
+            speaker: "Sheikh Abdullah"
+        },
+        {
+            id: 2,
+            date: "2023-06-16",
+            topic: "Sincerity in Worship",
+            speaker: "Sheikh Muhammad"
+        }
+    ],
+    maghribBayan: [
+        {
+            id: 1,
+            date: "2023-06-15",
+            summary: "Discussion on the life of the Prophet (PBUH)",
+            speaker: "Sheikh Abdullah"
+        }
+    ],
+    mashwara: [
+        {
+            id: 1,
+            date: "2023-06-15",
+            notes: "Planning for upcoming jamaats and resource allocation"
+        }
+    ]
+};
+
+let users = [
+    {
+        id: 1,
+        name: "Admin User",
+        email: "admin@tabligh.org",
+        role: "admin",
+        status: "active"
+    },
+    {
+        id: 2,
+        name: "Amir Khan",
+        email: "amir@tabligh.org",
+        role: "amir",
+        status: "active"
     }
-    
-    // Mock data for demonstration
-    const mockMasajid = [
-        { id: 1, name: 'Masjid Al-Huda', address: '123 Main St, Karachi', city: 'Karachi', country: 'Pakistan', imam: 'Maulana Ahmed', contact: '03001234567' },
-        { id: 2, name: 'Masjid Al-Noor', address: '456 Market Rd, Lahore', city: 'Lahore', country: 'Pakistan', imam: 'Maulana Ibrahim', contact: '03007654321' },
-        { id: 3, name: 'Masjid Al-Sunnah', address: '789 Islamic Ave, Islamabad', city: 'Islamabad', country: 'Pakistan', imam: 'Maulana Yusuf', contact: '03009876543' }
-    ];
-    
-    const mockJamaat = [
-        { id: 1, duration: '3', startDate: '2023-06-10', endDate: '2023-06-13', members: 'Ali, Ahmed, Bilal', masjid: 'Masjid Al-Huda', status: 'active' },
-        { id: 2, duration: '10', startDate: '2023-06-05', endDate: '2023-06-15', members: 'Usman, Umar, Hassan', masjid: 'Masjid Al-Noor', status: 'active' },
-        { id: 3, duration: '40', startDate: '2023-05-01', endDate: '2023-06-10', members: 'Yusuf, Hamza, Omar', masjid: 'Masjid Al-Sunnah', status: 'completed' },
-        { id: 4, duration: '3', startDate: '2023-06-15', endDate: '2023-06-18', members: 'Khalid, Waleed, Zubair', masjid: 'Masjid Al-Huda', status: 'upcoming' }
-    ];
-    
-    // Populate masjid table
-    function populateMasjidTable() {
-        const tableBody = document.getElementById('masjid-table-body');
-        tableBody.innerHTML = '';
-        
-        mockMasajid.forEach(masjid => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${masjid.name}</td>
-                <td>${masjid.address}</td>
-                <td>${masjid.imam}</td>
-                <td>${masjid.contact}</td>
-                <td>
-                    <button class="btn-icon edit-masjid" data-id="${masjid.id}"><i class="fas fa-edit"></i></button>
-                    <button class="btn-icon delete-masjid" data-id="${masjid.id}"><i class="fas fa-trash"></i></button>
-                </td>
-            `;
-            tableBody.appendChild(row);
-        });
-        
-        // Add event listeners to edit/delete buttons
-        document.querySelectorAll('.edit-masjid').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const masjidId = this.getAttribute('data-id');
-                const masjid = mockMasajid.find(m => m.id == masjidId);
-                
-                if (masjid) {
-                    document.getElementById('modal-masjid-title').textContent = 'Edit Masjid';
-                    document.getElementById('masjid-id').value = masjid.id;
-                    document.getElementById('masjid-name').value = masjid.name;
-                    document.getElementById('masjid-address').value = masjid.address;
-                    document.getElementById('masjid-city').value = masjid.city;
-                    document.getElementById('masjid-country').value = masjid.country;
-                    document.getElementById('masjid-imam').value = masjid.imam;
-                    document.getElementById('masjid-contact').value = masjid.contact;
-                    
-                    // Set random prayer times for demo
-                    document.getElementById('fajr-time').value = '05:30';
-                    document.getElementById('dhuhr-time').value = '13:30';
-                    document.getElementById('asr-time').value = '16:45';
-                    document.getElementById('maghrib-time').value = '19:15';
-                    document.getElementById('isha-time').value = '20:30';
-                    
-                    masjidModal.classList.add('active');
-                }
-            });
-        });
-        
-        document.querySelectorAll('.delete-masjid').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('Are you sure you want to delete this masjid?')) {
-                    alert('Masjid would be deleted in a real application');
-                }
-            });
-        });
-    }
-    
-    // Populate jamaat tables
-    function populateJamaatTables() {
-        // Active jamaat
-        const activeTable = document.getElementById('active-jamaat-table');
-        activeTable.innerHTML = '';
-        
-        const activeJamaat = mockJamaat.filter(j => j.status === 'active');
-        activeJamaat.forEach(jamaat => {
-            const row = document.createElement('tr');
-            const daysLeft = calculateDaysLeft(jamaat.endDate);
-            
-            row.innerHTML = `
-                <td>${jamaat.duration} Days</td>
-                <td>${formatDate(jamaat.startDate)}</td>
-                <td>${formatDate(jamaat.endDate)}</td>
-                <td>${jamaat.members.split(',').length}</td>
-                <td>${jamaat.masjid}</td>
-                <td><span class="status-badge active">Active (${daysLeft} days left)</span></td>
-                <td>
-                    <button class="btn-icon edit-jamaat" data-id="${jamaat.id}"><i class="fas fa-edit"></i></button>
-                    <button class="btn-icon complete-jamaat" data-id="${jamaat.id}"><i class="fas fa-check-circle"></i></button>
-                </td>
-            `;
-            activeTable.appendChild(row);
-        });
-        
-        // Upcoming jamaat
-        const upcomingTable = document.getElementById('upcoming-jamaat-table');
-        upcomingTable.innerHTML = '';
-        
-        const upcomingJamaat = mockJamaat.filter(j => j.status === 'upcoming');
-        upcomingJamaat.forEach(jamaat => {
-            const row = document.createElement('tr');
-            
-            row.innerHTML = `
-                <td>${jamaat.duration} Days</td>
-                <td>${formatDate(jamaat.startDate)}</td>
-                <td>${formatDate(jamaat.endDate)}</td>
-                <td>${jamaat.members.split(',').length}</td>
-                <td>${jamaat.masjid}</td>
-                <td>
-                    <button class="btn-icon edit-jamaat" data-id="${jamaat.id}"><i class="fas fa-edit"></i></button>
-                    <button class="btn-icon cancel-jamaat" data-id="${jamaat.id}"><i class="fas fa-times-circle"></i></button>
-                </td>
-            `;
-            upcomingTable.appendChild(row);
-        });
-        
-        // Completed jamaat
-        const completedTable = document.getElementById('completed-jamaat-table');
-        completedTable.innerHTML = '';
-        
-        const completedJamaat = mockJamaat.filter(j => j.status === 'completed');
-        completedJamaat.forEach(jamaat => {
-            const row = document.createElement('tr');
-            
-            row.innerHTML = `
-                <td>${jamaat.duration} Days</td>
-                <td>${formatDate(jamaat.startDate)}</td>
-                <td>${formatDate(jamaat.endDate)}</td>
-                <td>${jamaat.members.split(',').length}</td>
-                <td>${jamaat.masjid}</td>
-                <td>
-                    <button class="btn-icon view-jamaat" data-id="${jamaat.id}"><i class="fas fa-eye"></i></button>
-                </td>
-            `;
-            completedTable.appendChild(row);
-        });
-        
-        // Add event listeners to jamaat buttons
-        document.querySelectorAll('.edit-jamaat').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const jamaatId = this.getAttribute('data-id');
-                const jamaat = mockJamaat.find(j => j.id == jamaatId);
-                
-                if (jamaat) {
-                    document.getElementById('modal-jamaat-title').textContent = 'Edit Jamaat';
-                    document.getElementById('jamaat-id').value = jamaat.id;
-                    document.getElementById('jamaat-duration').value = jamaat.duration;
-                    document.getElementById('jamaat-start-date').value = jamaat.startDate;
-                    document.getElementById('jamaat-end-date').value = jamaat.endDate;
-                    document.getElementById('jamaat-members').value = jamaat.members;
-                    
-                    // Set masjid in dropdown
-                    const masjidSelect = document.getElementById('jamaat-masjid');
-                    const masjid = mockMasajid.find(m => m.name === jamaat.masjid);
-                    if (masjid) {
-                        masjidSelect.value = masjid.id;
-                    }
-                    
-                    jamaatModal.classList.add('active');
-                }
-            });
-        });
-        
-        document.querySelectorAll('.complete-jamaat').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('Mark this jamaat as completed?')) {
-                    alert('Jamaat would be marked as completed in a real application');
-                }
-            });
-        });
-        
-        document.querySelectorAll('.cancel-jamaat').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('Cancel this upcoming jamaat?')) {
-                    alert('Jamaat would be canceled in a real application');
-                }
-            });
-        });
-    }
-    
-    // Populate dashboard tables
-    function populateDashboardTables() {
-        // Upcoming jamaat
-        const upcomingList = document.getElementById('upcoming-jamaat-list');
-        upcomingList.innerHTML = '';
-        
-        const upcomingJamaat = mockJamaat.filter(j => j.status === 'upcoming').slice(0, 5);
-        upcomingJamaat.forEach(jamaat => {
-            const row = document.createElement('tr');
-            
-            row.innerHTML = `
-                <td>${jamaat.duration} Days</td>
-                <td>${formatDate(jamaat.startDate)}</td>
-                <td>${jamaat.members.split(',').length}</td>
-                <td>${jamaat.masjid}</td>
-            `;
-            upcomingList.appendChild(row);
-        });
-        
-        // Current jamaat
-        const currentList = document.getElementById('current-jamaat-list');
-        currentList.innerHTML = '';
-        
-        const currentJamaat = mockJamaat.filter(j => j.status === 'active').slice(0, 5);
-        currentJamaat.forEach(jamaat => {
-            const row = document.createElement('tr');
-            const daysLeft = calculateDaysLeft(jamaat.endDate);
-            
-            row.innerHTML = `
-                <td>${jamaat.duration} Days</td>
-                <td>${daysLeft}</td>
-                <td>${jamaat.members.split(',').length}</td>
-                <td>${jamaat.masjid}</td>
-            `;
-            currentList.appendChild(row);
-        });
-    }
-    
-    // Helper functions
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-    }
-    
-    function calculateDaysLeft(endDateString) {
-        const endDate = new Date(endDateString);
-        const today = new Date();
-        const diffTime = endDate - today;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        return diffDays > 0 ? diffDays : 0;
-    }
-    
-    // Form submissions
-    document.getElementById('masjid-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Masjid data would be saved in a real application');
-        masjidModal.classList.remove('active');
-    });
-    
-    document.getElementById('jamaat-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Jamaat data would be saved in a real application');
-        jamaatModal.classList.remove('active');
-    });
-    
-    document.getElementById('save-amaal').addEventListener('click', function() {
-        alert('Daily A\'maal would be saved in a real application');
-    });
-    
-    // Initialize all data and charts
-    populateMasjidTable();
-    populateJamaatTables();
-    populateDashboardTables();
-    initCharts();
+];
+
+// DOM Elements
+const sidebar = document.getElementById('sidebar');
+const toggleSidebar = document.getElementById('toggleSidebar');
+const navItems = document.querySelectorAll('.nav-item');
+const contentSections = document.querySelectorAll('.content-section');
+
+// Modal elements
+const masjidModal = document.getElementById('masjid-modal');
+const jamaatModal = document.getElementById('jamaat-modal');
+const amaalModal = document.getElementById('amaal-modal');
+const userModal = document.getElementById('user-modal');
+
+// Buttons
+const addMasjidBtn = document.getElementById('add-masjid-btn');
+const addJamaatBtn = document.getElementById('add-jamaat-btn');
+const addNewJamaatBtn = document.getElementById('add-new-jamaat-btn');
+const addAmaalBtn = document.getElementById('add-amaal-btn');
+const addUserBtn = document.getElementById('add-user-btn');
+
+// Form elements
+const masjidForm = document.getElementById('masjid-form');
+const jamaatForm = document.getElementById('jamaat-form');
+const amaalForm = document.getElementById('amaal-form');
+const userForm = document.getElementById('user-form');
+
+// Tab elements
+const tabs = document.querySelectorAll('.tab');
+const tabContents = document.querySelectorAll('.tab-content');
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function () {
+    // Load data
+    renderMasajid();
+    renderJamaats();
+    renderRecentJamaats();
+    renderAmaal();
+    renderUsers();
+    renderCharts();
+
+    // Update dashboard stats
+    updateDashboardStats();
+
+    // Set up event listeners
+    setupEventListeners();
 });
+
+function setupEventListeners() {
+    // Sidebar toggle
+    toggleSidebar.addEventListener('click', function () {
+        sidebar.classList.toggle('collapsed');
+    });
+
+    // Navigation items
+    navItems.forEach(item => {
+        item.addEventListener('click', function () {
+            // Remove active class from all nav items
+            navItems.forEach(navItem => navItem.classList.remove('active'));
+
+            // Add active class to clicked nav item
+            this.classList.add('active');
+
+            // Hide all content sections
+            contentSections.forEach(section => section.classList.remove('active'));
+
+            // Show the corresponding content section
+            const sectionId = this.getAttribute('data-section') + '-section';
+            document.getElementById(sectionId).classList.add('active');
+        });
+    });
+
+    // Masjid modal
+    addMasjidBtn.addEventListener('click', () => openModal('masjid'));
+    document.getElementById('cancel-masjid').addEventListener('click', () => closeModal('masjid'));
+    document.getElementById('save-masjid').addEventListener('click', saveMasjid);
+
+    // Jamaat modal
+    addJamaatBtn.addEventListener('click', () => openModal('jamaat'));
+    addNewJamaatBtn.addEventListener('click', () => openModal('jamaat'));
+    document.getElementById('cancel-jamaat').addEventListener('click', () => closeModal('jamaat'));
+    document.getElementById('save-jamaat').addEventListener('click', saveJamaat);
+
+    // A'maal modal
+    addAmaalBtn.addEventListener('click', () => openModal('amaal'));
+    document.getElementById('cancel-amaal').addEventListener('click', () => closeModal('amaal'));
+    document.getElementById('save-amaal').addEventListener('click', saveAmaal);
+
+    // User modal
+    addUserBtn.addEventListener('click', () => openModal('user'));
+    document.getElementById('cancel-user').addEventListener('click', () => closeModal('user'));
+    document.getElementById('save-user').addEventListener('click', saveUser);
+
+    // Modal close buttons
+    document.querySelectorAll('.modal-close').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const modal = this.closest('.modal');
+            modal.style.display = 'none';
+        });
+    });
+
+    // Tabs
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+            const tabId = this.getAttribute('data-tab');
+
+            // Remove active class from all tabs
+            tabs.forEach(t => t.classList.remove('active'));
+
+            // Add active class to clicked tab
+            this.classList.add('active');
+
+            // Hide all tab contents
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Show the corresponding tab content
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+        });
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function (event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+        }
+    });
+}
+
+function openModal(modalType) {
+    const modal = document.getElementById(`${modalType}-modal`);
+    modal.style.display = 'flex';
+
+    // Reset form
+    document.getElementById(`${modalType}-form`).reset();
+
+    // Prepare modal based on type
+    switch (modalType) {
+        case 'masjid':
+            document.getElementById('masjid-id').value = '';
+            document.querySelector('#masjid-modal .modal-title').textContent = 'Add New Masjid';
+            break;
+
+        case 'jamaat':
+            document.getElementById('jamaat-id').value = '';
+            document.querySelector('#jamaat-modal .modal-title').textContent = 'Add New Jamaat';
+
+            // Populate masjid dropdown
+            const masjidSelect = document.getElementById('jamaat-masjid');
+            masjidSelect.innerHTML = '<option value="">Select Masjid</option>';
+            masajid.forEach(masjid => {
+                const option = document.createElement('option');
+                option.value = masjid.id;
+                option.textContent = masjid.name;
+                masjidSelect.appendChild(option);
+            });
+            break;
+
+        case 'amaal':
+            document.getElementById('amaal-id').value = '';
+            document.getElementById('amaal-type').value = '';
+            document.querySelector('#amaal-modal .modal-title').textContent = 'Add Daily A\'maal';
+
+            // Show all fields initially
+            document.getElementById('taaleem-topic-group').style.display = 'block';
+            document.getElementById('bayan-summary-group').style.display = 'block';
+            document.getElementById('mashwara-notes-group').style.display = 'block';
+            document.getElementById('speaker-group').style.display = 'block';
+            break;
+
+        case 'user':
+            document.getElementById('user-id').value = '';
+            document.querySelector('#user-modal .modal-title').textContent = 'Add New User';
+            document.getElementById('user-password').required = true;
+            break;
+    }
+}
+
+function closeModal(modalType) {
+    document.getElementById(`${modalType}-modal`).style.display = 'none';
+}
+
+function saveMasjid() {
+    const id = document.getElementById('masjid-id').value;
+    const name = document.getElementById('masjid-name').value;
+    const address = document.getElementById('masjid-address').value;
+    const imam = document.getElementById('masjid-imam').value;
+    const contact = document.getElementById('masjid-contact').value;
+
+    const prayerTimes = {
+        fajr: document.getElementById('masjid-fajr').value,
+        dhuhr: document.getElementById('masjid-dhuhr').value,
+        asr: document.getElementById('masjid-asr').value,
+        maghrib: document.getElementById('masjid-maghrib').value,
+        isha: document.getElementById('masjid-isha').value
+    };
+
+    if (id) {
+        // Update existing masjid
+        const index = masajid.findIndex(m => m.id == id);
+        if (index !== -1) {
+            masajid[index] = {
+                id: parseInt(id),
+                name,
+                address,
+                imam,
+                contact,
+                prayerTimes
+            };
+        }
+    } else {
+        // Add new masjid
+        const newId = masajid.length > 0 ? Math.max(...masajid.map(m => m.id)) + 1 : 1;
+        masajid.push({
+            id: newId,
+            name,
+            address,
+            imam,
+            contact,
+            prayerTimes
+        });
+    }
+
+    renderMasajid();
+    updateDashboardStats();
+    closeModal('masjid');
+}
+
+function saveJamaat() {
+    const id = document.getElementById('jamaat-id').value;
+    const duration = document.getElementById('jamaat-duration').value;
+    const startDate = document.getElementById('jamaat-start-date').value;
+    const endDate = document.getElementById('jamaat-end-date').value;
+    const masjidId = document.getElementById('jamaat-masjid').value;
+    const members = document.getElementById('jamaat-members').value.split(',').map(m => m.trim());
+    const amir = document.getElementById('jamaat-amir').value;
+    const notes = document.getElementById('jamaat-notes').value;
+
+    // Determine status based on dates
+    const today = new Date().toISOString().split('T')[0];
+    let status;
+    if (endDate < today) {
+        status = 'completed';
+    } else if (startDate <= today && endDate >= today) {
+        status = 'active';
+    } else {
+        status = 'upcoming';
+    }
+
+    if (id) {
+        // Update existing jamaat
+        const index = jamaats.findIndex(j => j.id == id);
+        if (index !== -1) {
+            jamaats[index] = {
+                id: parseInt(id),
+                duration: parseInt(duration),
+                startDate,
+                endDate,
+                masjidId: parseInt(masjidId),
+                members,
+                amir,
+                notes,
+                status
+            };
+        }
+    } else {
+        // Add new jamaat
+        const newId = jamaats.length > 0 ? Math.max(...jamaats.map(j => j.id)) + 1 : 1;
+        jamaats.push({
+            id: newId,
+            duration: parseInt(duration),
+            startDate,
+            endDate,
+            masjidId: parseInt(masjidId),
+            members,
+            amir,
+            notes,
+            status
+        });
+    }
+
+    renderJamaats();
+    renderRecentJamaats();
+    updateDashboardStats();
+    renderCharts();
+    closeModal('jamaat');
+}
+
+function saveAmaal() {
+    const id = document.getElementById('amaal-id').value;
+    const type = document.getElementById('amaal-type').value || 'fajr'; // Default to fajr if not set
+    const date = document.getElementById('amaal-date').value;
+
+    if (type === 'fajr') {
+        const topic = document.getElementById('taaleem-topic').value;
+        const speaker = document.getElementById('speaker-name').value;
+
+        if (id) {
+            // Update existing taaleem
+            const index = amaal.fajrTaaleem.findIndex(t => t.id == id);
+            if (index !== -1) {
+                amaal.fajrTaaleem[index] = { id: parseInt(id), date, topic, speaker };
+            }
+        } else {
+            // Add new taaleem
+            const newId = amaal.fajrTaaleem.length > 0 ? Math.max(...amaal.fajrTaaleem.map(t => t.id)) + 1 : 1;
+            amaal.fajrTaaleem.push({ id: newId, date, topic, speaker });
+        }
+    } else if (type === 'maghrib') {
+        const summary = document.getElementById('bayan-summary').value;
+        const speaker = document.getElementById('speaker-name').value;
+
+        if (id) {
+            // Update existing bayan
+            const index = amaal.maghribBayan.findIndex(b => b.id == id);
+            if (index !== -1) {
+                amaal.maghribBayan[index] = { id: parseInt(id), date, summary, speaker };
+            }
+        } else {
+            // Add new bayan
+            const newId = amaal.maghribBayan.length > 0 ? Math.max(...amaal.maghribBayan.map(b => b.id)) + 1 : 1;
+            amaal.maghribBayan.push({ id: newId, date, summary, speaker });
+        }
+    } else if (type === 'mashwara') {
+        const notes = document.getElementById('mashwara-notes').value;
+
+        if (id) {
+            // Update existing mashwara
+            const index = amaal.mashwara.findIndex(m => m.id == id);
+            if (index !== -1) {
+                amaal.mashwara[index] = { id: parseInt(id), date, notes };
+            }
+        } else {
+            // Add new mashwara
+            const newId = amaal.mashwara.length > 0 ? Math.max(...amaal.mashwara.map(m => m.id)) + 1 : 1;
+            amaal.mashwara.push({ id: newId, date, notes });
+        }
+    }
+
+    renderAmaal();
+    closeModal('amaal');
+}
+
+function saveUser() {
+    const id = document.getElementById('user-id').value;
+    const name = document.getElementById('user-name').value;
+    const email = document.getElementById('user-email').value;
+    const role = document.getElementById('user-role').value;
+    const password = document.getElementById('user-password').value;
+    const status = document.getElementById('user-status').value;
+
+    if (id) {
+        // Update existing user
+        const index = users.findIndex(u => u.id == id);
+        if (index !== -1) {
+            users[index] = {
+                id: parseInt(id),
+                name,
+                email,
+                role,
+                status
+            };
+            // Only update password if provided
+            if (password) {
+                users[index].password = password;
+            }
+        }
+    } else {
+        // Add new user
+        const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+        users.push({
+            id: newId,
+            name,
+            email,
+            role,
+            password,
+            status
+        });
+    }
+
+    renderUsers();
+    closeModal('user');
+}
+
+function renderMasajid() {
+    const masajidList = document.getElementById('masajid-list');
+    masajidList.innerHTML = '';
+
+    masajid.forEach(masjid => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+                    <td>${masjid.name}</td>
+                    <td>${masjid.address}</td>
+                    <td>${masjid.imam}</td>
+                    <td>${masjid.contact}</td>
+                    <td>
+                        <button class="btn btn-secondary edit-masjid" data-id="${masjid.id}">Edit</button>
+                        <button class="btn btn-secondary delete-masjid" data-id="${masjid.id}">Delete</button>
+                    </td>
+                `;
+
+        masajidList.appendChild(row);
+    });
+
+    // Add event listeners for edit and delete buttons
+    document.querySelectorAll('.edit-masjid').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            editMasjid(id);
+        });
+    });
+
+    document.querySelectorAll('.delete-masjid').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            deleteMasjid(id);
+        });
+    });
+}
+
+function renderJamaats() {
+    const jamaatList = document.getElementById('jamaat-list');
+    jamaatList.innerHTML = '';
+
+    jamaats.forEach(jamaat => {
+        const masjid = masajid.find(m => m.id == jamaat.masjidId);
+        const masjidName = masjid ? masjid.name : 'Not assigned';
+
+        let statusBadge;
+        if (jamaat.status === 'active') {
+            statusBadge = '<span class="badge badge-success">Active</span>';
+        } else if (jamaat.status === 'completed') {
+            statusBadge = '<span class="badge badge-info">Completed</span>';
+        } else {
+            statusBadge = '<span class="badge badge-warning">Upcoming</span>';
+        }
+
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+                    <td>${jamaat.id}</td>
+                    <td>${jamaat.duration} Days</td>
+                    <td>${formatDate(jamaat.startDate)}</td>
+                    <td>${formatDate(jamaat.endDate)}</td>
+                    <td>${jamaat.members.join(', ')}</td>
+                    <td>${masjidName}</td>
+                    <td>${statusBadge}</td>
+                    <td>
+                        <button class="btn btn-secondary edit-jamaat" data-id="${jamaat.id}">Edit</button>
+                        <button class="btn btn-secondary delete-jamaat" data-id="${jamaat.id}">Delete</button>
+                    </td>
+                `;
+
+        jamaatList.appendChild(row);
+    });
+
+    // Add event listeners for edit and delete buttons
+    document.querySelectorAll('.edit-jamaat').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            editJamaat(id);
+        });
+    });
+
+    document.querySelectorAll('.delete-jamaat').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            deleteJamaat(id);
+        });
+    });
+}
+
+function renderRecentJamaats() {
+    const recentJamaats = document.getElementById('recent-jamaats');
+    recentJamaats.innerHTML = '';
+
+    // Sort jamaats by start date (newest first)
+    const sortedJamaats = [...jamaats].sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+
+    // Get the 5 most recent jamaats
+    const recent = sortedJamaats.slice(0, 5);
+
+    recent.forEach(jamaat => {
+        const masjid = masajid.find(m => m.id == jamaat.masjidId);
+        const masjidName = masjid ? masjid.name : 'Not assigned';
+
+        let statusBadge;
+        if (jamaat.status === 'active') {
+            statusBadge = '<span class="badge badge-success">Active</span>';
+        } else if (jamaat.status === 'completed') {
+            statusBadge = '<span class="badge badge-info">Completed</span>';
+        } else {
+            statusBadge = '<span class="badge badge-warning">Upcoming</span>';
+        }
+
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+                    <td>${jamaat.id}</td>
+                    <td>${jamaat.duration} Days</td>
+                    <td>${jamaat.members.length}</td>
+                    <td>${masjidName}</td>
+                    <td>${statusBadge}</td>
+                    <td>
+                        <button class="btn btn-secondary view-jamaat" data-id="${jamaat.id}">View</button>
+                    </td>
+                `;
+
+        recentJamaats.appendChild(row);
+    });
+
+    // Add event listeners for view buttons
+    document.querySelectorAll('.view-jamaat').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            viewJamaat(id);
+        });
+    });
+}
+
+function renderAmaal() {
+    // Fajr Taaleem
+    const fajrList = document.getElementById('fajr-taaleem-list');
+    fajrList.innerHTML = '';
+
+    amaal.fajrTaaleem.forEach(taaleem => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+                    <td>${formatDate(taaleem.date)}</td>
+                    <td>${taaleem.topic}</td>
+                    <td>${taaleem.speaker}</td>
+                    <td>
+                        <button class="btn btn-secondary edit-amaal" data-type="fajr" data-id="${taaleem.id}">Edit</button>
+                        <button class="btn btn-secondary delete-amaal" data-type="fajr" data-id="${taaleem.id}">Delete</button>
+                    </td>
+                `;
+
+        fajrList.appendChild(row);
+    });
+
+    // Maghrib Bayan
+    const maghribList = document.getElementById('maghrib-bayan-list');
+    maghribList.innerHTML = '';
+
+    amaal.maghribBayan.forEach(bayan => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+                    <td>${formatDate(bayan.date)}</td>
+                    <td>${bayan.summary}</td>
+                    <td>${bayan.speaker}</td>
+                    <td>
+                        <button class="btn btn-secondary edit-amaal" data-type="maghrib" data-id="${bayan.id}">Edit</button>
+                        <button class="btn btn-secondary delete-amaal" data-type="maghrib" data-id="${bayan.id}">Delete</button>
+                    </td>
+                `;
+
+        maghribList.appendChild(row);
+    });
+
+    // Mashwara
+    const mashwaraList = document.getElementById('mashwara-list');
+    mashwaraList.innerHTML = '';
+
+    amaal.mashwara.forEach(mashwara => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+                    <td>${formatDate(mashwara.date)}</td>
+                    <td>${mashwara.notes}</td>
+                    <td>
+                        <button class="btn btn-secondary edit-amaal" data-type="mashwara" data-id="${mashwara.id}">Edit</button>
+                        <button class="btn btn-secondary delete-amaal" data-type="mashwara" data-id="${mashwara.id}">Delete</button>
+                    </td>
+                `;
+
+        mashwaraList.appendChild(row);
+    });
+
+    // Add event listeners for edit and delete buttons
+    document.querySelectorAll('.edit-amaal').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const type = this.getAttribute('data-type');
+            const id = this.getAttribute('data-id');
+            editAmaal(type, id);
+        });
+    });
+
+    document.querySelectorAll('.delete-amaal').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const type = this.getAttribute('data-type');
+            const id = this.getAttribute('data-id');
+            deleteAmaal(type, id);
+        });
+    });
+}
+
+function renderUsers() {
+    const usersList = document.getElementById('users-list');
+    usersList.innerHTML = '';
+
+    users.forEach(user => {
+        let roleBadge;
+        if (user.role === 'admin') {
+            roleBadge = '<span class="badge badge-danger">Admin</span>';
+        } else if (user.role === 'amir') {
+            roleBadge = '<span class="badge badge-warning">Amir</span>';
+        } else {
+            roleBadge = '<span class="badge badge-info">Member</span>';
+        }
+
+        let statusBadge = user.status === 'active'
+            ? '<span class="badge badge-success">Active</span>'
+            : '<span class="badge badge-secondary">Inactive</span>';
+
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${roleBadge}</td>
+                    <td>${statusBadge}</td>
+                    <td>
+                        <button class="btn btn-secondary edit-user" data-id="${user.id}">Edit</button>
+                        <button class="btn btn-secondary delete-user" data-id="${user.id}">Delete</button>
+                    </td>
+                `;
+
+        usersList.appendChild(row);
+    });
+
+    // Add event listeners for edit and delete buttons
+    document.querySelectorAll('.edit-user').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            editUser(id);
+        });
+    });
+
+    document.querySelectorAll('.delete-user').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            deleteUser(id);
+        });
+    });
+}
+
+function renderCharts() {
+    // Monthly Khurooj Chart
+    const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+
+    // Sample data for monthly khurooj
+    const monthlyData = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+            label: 'Jamaats per Month',
+            data: [5, 8, 10, 7, 12, 15, 18, 20, 15, 12, 8, 6],
+            backgroundColor: 'rgba(44, 120, 108, 0.2)',
+            borderColor: 'rgba(44, 120, 108, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    new Chart(monthlyCtx, {
+        type: 'bar',
+        data: monthlyData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Duration Pie Chart
+    const durationCtx = document.getElementById('durationChart').getContext('2d');
+
+    // Calculate durations from jamaats data
+    const durations = {
+        '3 Days': jamaats.filter(j => j.duration === 3).length,
+        '10 Days': jamaats.filter(j => j.duration === 10).length,
+        '40 Days': jamaats.filter(j => j.duration === 40).length,
+        '4 Months': jamaats.filter(j => j.duration === 120).length
+    };
+
+    const durationData = {
+        labels: Object.keys(durations),
+        datasets: [{
+            data: Object.values(durations),
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    new Chart(durationCtx, {
+        type: 'pie',
+        data: durationData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    // Masjid Bar Chart
+    const masjidCtx = document.getElementById('masjidChart').getContext('2d');
+
+    // Count jamaats per masjid
+    const masjidCounts = {};
+    masajid.forEach(masjid => {
+        masjidCounts[masjid.name] = jamaats.filter(j => j.masjidId === masjid.id).length;
+    });
+
+    const masjidData = {
+        labels: Object.keys(masjidCounts),
+        datasets: [{
+            label: 'Jamaats per Masjid',
+            data: Object.values(masjidCounts),
+            backgroundColor: 'rgba(248, 180, 0, 0.7)',
+            borderColor: 'rgba(248, 180, 0, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    new Chart(masjidCtx, {
+        type: 'bar',
+        data: masjidData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function updateDashboardStats() {
+    // Active jamaats
+    const activeJamaats = jamaats.filter(j => j.status === 'active').length;
+    document.getElementById('active-jamaats').textContent = activeJamaats;
+
+    // Total masajid
+    document.getElementById('total-masajid').textContent = masajid.length;
+
+    // Monthly khurooj (this month)
+    const currentMonth = new Date().getMonth();
+    const monthlyKhurooj = jamaats.filter(j => {
+        const jamaatMonth = new Date(j.startDate).getMonth();
+        return jamaatMonth === currentMonth;
+    }).length;
+    document.getElementById('monthly-khurooj').textContent = monthlyKhurooj;
+
+    // Total members (unique)
+    const allMembers = jamaats.flatMap(j => j.members);
+    const uniqueMembers = [...new Set(allMembers)].length;
+    document.getElementById('total-members').textContent = uniqueMembers;
+}
+
+function editMasjid(id) {
+    const masjid = masajid.find(m => m.id == id);
+    if (!masjid) return;
+
+    document.getElementById('masjid-id').value = masjid.id;
+    document.getElementById('masjid-name').value = masjid.name;
+    document.getElementById('masjid-address').value = masjid.address;
+    document.getElementById('masjid-imam').value = masjid.imam;
+    document.getElementById('masjid-contact').value = masjid.contact;
+    document.getElementById('masjid-fajr').value = masjid.prayerTimes.fajr;
+    document.getElementById('masjid-dhuhr').value = masjid.prayerTimes.dhuhr;
+    document.getElementById('masjid-asr').value = masjid.prayerTimes.asr;
+    document.getElementById('masjid-maghrib').value = masjid.prayerTimes.maghrib;
+    document.getElementById('masjid-isha').value = masjid.prayerTimes.isha;
+
+    document.querySelector('#masjid-modal .modal-title').textContent = 'Edit Masjid';
+    masjidModal.style.display = 'flex';
+}
+
+function editJamaat(id) {
+    const jamaat = jamaats.find(j => j.id == id);
+    if (!jamaat) return;
+
+    document.getElementById('jamaat-id').value = jamaat.id;
+    document.getElementById('jamaat-duration').value = jamaat.duration;
+    document.getElementById('jamaat-start-date').value = jamaat.startDate;
+    document.getElementById('jamaat-end-date').value = jamaat.endDate;
+    document.getElementById('jamaat-masjid').value = jamaat.masjidId;
+    document.getElementById('jamaat-members').value = jamaat.members.join(', ');
+    document.getElementById('jamaat-amir').value = jamaat.amir;
+    document.getElementById('jamaat-notes').value = jamaat.notes;
+
+    // Populate masjid dropdown
+    const masjidSelect = document.getElementById('jamaat-masjid');
+    masjidSelect.innerHTML = '<option value="">Select Masjid</option>';
+    masajid.forEach(masjid => {
+        const option = document.createElement('option');
+        option.value = masjid.id;
+        option.textContent = masjid.name;
+        if (masjid.id == jamaat.masjidId) {
+            option.selected = true;
+        }
+        masjidSelect.appendChild(option);
+    });
+
+    document.querySelector('#jamaat-modal .modal-title').textContent = 'Edit Jamaat';
+    jamaatModal.style.display = 'flex';
+}
+
+function editAmaal(type, id) {
+    let amaalItem;
+    let modalTitle = '';
+
+    if (type === 'fajr') {
+        amaalItem = amaal.fajrTaaleem.find(t => t.id == id);
+        modalTitle = 'Edit Fajr Taaleem';
+
+        // Show only relevant fields
+        document.getElementById('taaleem-topic-group').style.display = 'block';
+        document.getElementById('bayan-summary-group').style.display = 'none';
+        document.getElementById('mashwara-notes-group').style.display = 'none';
+        document.getElementById('speaker-group').style.display = 'block';
+    } else if (type === 'maghrib') {
+        amaalItem = amaal.maghribBayan.find(b => b.id == id);
+        modalTitle = 'Edit Maghrib Bayan';
+
+        // Show only relevant fields
+        document.getElementById('taaleem-topic-group').style.display = 'none';
+        document.getElementById('bayan-summary-group').style.display = 'block';
+        document.getElementById('mashwara-notes-group').style.display = 'none';
+        document.getElementById('speaker-group').style.display = 'block';
+    } else if (type === 'mashwara') {
+        amaalItem = amaal.mashwara.find(m => m.id == id);
+        modalTitle = 'Edit Mashwara Notes';
+
+        // Show only relevant fields
+        document.getElementById('taaleem-topic-group').style.display = 'none';
+        document.getElementById('bayan-summary-group').style.display = 'none';
+        document.getElementById('mashwara-notes-group').style.display = 'block';
+        document.getElementById('speaker-group').style.display = 'none';
+    }
+
+    if (!amaalItem) return;
+
+    document.getElementById('amaal-id').value = amaalItem.id;
+    document.getElementById('amaal-type').value = type;
+    document.getElementById('amaal-date').value = amaalItem.date;
+
+    if (type === 'fajr') {
+        document.getElementById('taaleem-topic').value = amaalItem.topic;
+        document.getElementById('speaker-name').value = amaalItem.speaker;
+    } else if (type === 'maghrib') {
+        document.getElementById('bayan-summary').value = amaalItem.summary;
+        document.getElementById('speaker-name').value = amaalItem.speaker;
+    } else if (type === 'mashwara') {
+        document.getElementById('mashwara-notes').value = amaalItem.notes;
+    }
+
+    document.querySelector('#amaal-modal .modal-title').textContent = modalTitle;
+    amaalModal.style.display = 'flex';
+}
+
+function editUser(id) {
+    const user = users.find(u => u.id == id);
+    if (!user) return;
+
+    document.getElementById('user-id').value = user.id;
+    document.getElementById('user-name').value = user.name;
+    document.getElementById('user-email').value = user.email;
+    document.getElementById('user-role').value = user.role;
+    document.getElementById('user-status').value = user.status;
+    document.getElementById('user-password').required = false;
+
+    document.querySelector('#user-modal .modal-title').textContent = 'Edit User';
+    userModal.style.display = 'flex';
+}
+
+function viewJamaat(id) {
+    const jamaat = jamaats.find(j => j.id == id);
+    if (!jamaat) return;
+
+    // For this simple implementation, we'll just edit the jamaat
+    editJamaat(id);
+}
+
+function deleteMasjid(id) {
+    if (confirm('Are you sure you want to delete this masjid?')) {
+        masajid = masajid.filter(m => m.id != id);
+        renderMasajid();
+        updateDashboardStats();
+    }
+}
+
+function deleteJamaat(id) {
+    if (confirm('Are you sure you want to delete this jamaat?')) {
+        jamaats = jamaats.filter(j => j.id != id);
+        renderJamaats();
+        renderRecentJamaats();
+        updateDashboardStats();
+        renderCharts();
+    }
+}
+
+function deleteAmaal(type, id) {
+    if (confirm('Are you sure you want to delete this record?')) {
+        if (type === 'fajr') {
+            amaal.fajrTaaleem = amaal.fajrTaaleem.filter(t => t.id != id);
+        } else if (type === 'maghrib') {
+            amaal.maghribBayan = amaal.maghribBayan.filter(b => b.id != id);
+        } else if (type === 'mashwara') {
+            amaal.mashwara = amaal.mashwara.filter(m => m.id != id);
+        }
+
+        renderAmaal();
+    }
+}
+
+function deleteUser(id) {
+    if (confirm('Are you sure you want to delete this user?')) {
+        users = users.filter(u => u.id != id);
+        renderUsers();
+    }
+}
+
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+}
