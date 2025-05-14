@@ -60,7 +60,7 @@ header {
     top: 0;
     z-index: 100;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -116,7 +116,7 @@ header {
 }
 
 .sidebar-header {
-    padding: 0 1.5rem 1.5rem;
+    padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -606,6 +606,10 @@ select.form-control {
 
 /* Responsive Styles */
 @media (max-width: 992px) {
+    .display-none{
+        display: none;
+    }
+
     .header-title {
         font-size: 1rem;
     }
@@ -798,6 +802,9 @@ select.form-control {
     .contact-container {
         grid-template-columns: 1fr;
     }
+    .user-profile{
+        display: none;
+    }
 }
 
 /* Footer Styles */
@@ -842,7 +849,6 @@ select.form-control {
 .footer-section p {
     color: rgba(255,255,255,0.7);
     line-height: 1.6;
-    margin-bottom: 1rem;
 }
 
 .footer-section ul {
