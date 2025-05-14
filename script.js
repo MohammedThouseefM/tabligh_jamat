@@ -2,9 +2,9 @@
 let masajid = [
     {
         id: 1,
-        name: "chok masjid",
-        address: "small mosque street, pernambut",
-        imam: "saadi hazrat",
+        name: "Chok Masjid",
+        address: "Small Mosque Street, Pernambut",
+        imam: "Saadi Hazrat",
         contact: "0234562789",
         prayerTimes: {
             fajr: "05:30",
@@ -15,9 +15,9 @@ let masajid = [
         }
     },
     {
-        id: 1,
-        name: "choti masjid",
-        address: "small mosque street, pernambut",
+        id: 2,
+        name: "Choti Masjid",
+        address: "Small Mosque Street, Pernambut",
         imam: "Sheikh Abdullah",
         contact: "0123456789",
         prayerTimes: {
@@ -29,21 +29,21 @@ let masajid = [
         }
     },
     {
-        id: 1,
+        id: 3,
         name: "Masjid Al-Huda",
         address: "123 Islamic Street, Makkah Town",
-        imam: "Sheikh Abdullah",
-        contact: "0123456789",
+        imam: "Sheikh Farooq",
+        contact: "0192837465",
         prayerTimes: {
-            fajr: "05:30",
-            dhuhr: "13:15",
-            asr: "16:30",
-            maghrib: "19:00",
-            isha: "20:15"
+            fajr: "05:32",
+            dhuhr: "13:18",
+            asr: "16:32",
+            maghrib: "19:02",
+            isha: "20:17"
         }
     },
     {
-        id: 2,
+        id: 4,
         name: "Masjid An-Noor",
         address: "456 Sunnah Avenue, Madinah City",
         imam: "Sheikh Muhammad",
@@ -55,8 +55,149 @@ let masajid = [
             maghrib: "19:15",
             isha: "20:30"
         }
+    },
+    {
+        id: 5,
+        name: "Masjid Al-Falah",
+        address: "Green Garden Road, Vellore",
+        imam: "Mufti Salman",
+        contact: "0912345678",
+        prayerTimes: {
+            fajr: "05:40",
+            dhuhr: "13:25",
+            asr: "16:40",
+            maghrib: "19:10",
+            isha: "20:20"
+        }
+    },
+    {
+        id: 6,
+        name: "Masjid Usman Bin Affan",
+        address: "Old Bazaar, Pernambut",
+        imam: "Imam Rafiq",
+        contact: "0823456712",
+        prayerTimes: {
+            fajr: "05:33",
+            dhuhr: "13:18",
+            asr: "16:33",
+            maghrib: "19:03",
+            isha: "20:18"
+        }
+    },
+    {
+        id: 7,
+        name: "Masjid Al-Taqwa",
+        address: "Hilltop Area, Pernambut",
+        imam: "Sheikh Imran",
+        contact: "0789012345",
+        prayerTimes: {
+            fajr: "05:28",
+            dhuhr: "13:12",
+            asr: "16:28",
+            maghrib: "18:58",
+            isha: "20:10"
+        }
+    },
+    {
+        id: 8,
+        name: "Masjid Rahmaniya",
+        address: "Rahmania Street, Ambur Road",
+        imam: "Maulana Yasin",
+        contact: "0876543210",
+        prayerTimes: {
+            fajr: "05:37",
+            dhuhr: "13:27",
+            asr: "16:43",
+            maghrib: "19:12",
+            isha: "20:22"
+        }
+    },
+    {
+        id: 9,
+        name: "Masjid-e-Quba",
+        address: "Bismillah Nagar, Pernambut",
+        imam: "Sheikh Khalid",
+        contact: "0765432198",
+        prayerTimes: {
+            fajr: "05:29",
+            dhuhr: "13:14",
+            asr: "16:29",
+            maghrib: "19:01",
+            isha: "20:13"
+        }
+    },
+    {
+        id: 10,
+        name: "Masjid Noorani",
+        address: "Masjid Street, Vaniyambadi",
+        imam: "Maulana Faheem",
+        contact: "0654321987",
+        prayerTimes: {
+            fajr: "05:36",
+            dhuhr: "13:22",
+            asr: "16:38",
+            maghrib: "19:09",
+            isha: "20:21"
+        }
+    },
+    {
+        id: 11,
+        name: "Masjid Bait-us-Salaam",
+        address: "Peace Road, Nellikuppam",
+        imam: "Imam Junaid",
+        contact: "0543219876",
+        prayerTimes: {
+            fajr: "05:34",
+            dhuhr: "13:20",
+            asr: "16:34",
+            maghrib: "19:04",
+            isha: "20:19"
+        }
+    },
+    {
+        id: 12,
+        name: "Masjid Al-Kausar",
+        address: "Riverbank Road, Arcot",
+        imam: "Sheikh Azhar",
+        contact: "0432198765",
+        prayerTimes: {
+            fajr: "05:41",
+            dhuhr: "13:28",
+            asr: "16:42",
+            maghrib: "19:13",
+            isha: "20:24"
+        }
+    },
+    {
+        id: 13,
+        name: "Masjid Al-Rahma",
+        address: "Mill Street, Pernambut",
+        imam: "Maulana Ibrahim",
+        contact: "0321987654",
+        prayerTimes: {
+            fajr: "05:39",
+            dhuhr: "13:24",
+            asr: "16:39",
+            maghrib: "19:11",
+            isha: "20:23"
+        }
+    },
+    {
+        id: 14,
+        name: "Masjid Bilal",
+        address: "Central Colony, Pernambut",
+        imam: "Imam Bilal Ahmed",
+        contact: "0219876543",
+        prayerTimes: {
+            fajr: "05:27",
+            dhuhr: "13:11",
+            asr: "16:27",
+            maghrib: "18:57",
+            isha: "20:09"
+        }
     }
 ];
+
 
 let jamaats = [
     {
@@ -65,17 +206,8 @@ let jamaats = [
         startDate: "2024-07-01",
         endDate: "2024-07-03",
         masjidId: 2,
-        members: ["Ayaan",
-            "Fatima",
-            "Zayd",
-            "Aisha",
-            "Ibrahim",
-            "Maryam",
-            "Yusuf",
-            "Huda",
-            "Ali",
-            "Khadija"],
-        amir: "mohammed thousef",
+        members: ["Ayaan", "Fatima", "Zayd", "Aisha", "Ibrahim", "Maryam", "Yusuf", "Huda", "Ali", "Khadija"],
+        amir: "Mohammed Thousef",
         notes: "Local jamaat for 3 days",
         status: "completed"
     },
@@ -85,15 +217,8 @@ let jamaats = [
         startDate: "2025-09-03",
         endDate: "2025-09-06",
         masjidId: 3,
-        members: ["Hassan",
-            "Sumayya",
-            "Omar",
-            "Safiya",
-            "Bilal",
-            "Rania",
-            "Salman",
-            "Noor"],
-        amir: "abdullah",
+        members: ["Hassan", "Sumayya", "Omar", "Safiya", "Bilal", "Rania", "Salman", "Noor"],
+        amir: "Abdullah",
         notes: "Local jamaat for 3 days",
         status: "completed"
     },
@@ -103,30 +228,20 @@ let jamaats = [
         startDate: "2025-10-01",
         endDate: "2025-10-10",
         masjidId: 4,
-        members: ["Amira",
-            "Khalid",
-            "Nadia",
-            "Faizan",
-            "Yasmin",
-            "Sami",
-            "Haleema"],
-        amir: "Ahmed ali",
-        notes: "Local jamaat for 3 days",
+        members: ["Amira", "Khalid", "Nadia", "Faizan", "Yasmin", "Sami", "Haleema"],
+        amir: "Ahmed Ali",
+        notes: "10-day jamaat within the district",
         status: "active"
     },
     {
         id: 4,
         duration: 40,
         startDate: "2025-11-01",
-        endDate: "2023-12-10",
+        endDate: "2025-12-10",
         masjidId: 3,
-        members: ["Aaliyah",
-            "Imran",
-            "Naima",
-            "Haroon",
-            "Bushra"],
+        members: ["Aaliyah", "Imran", "Naima", "Haroon", "Bushra"],
         amir: "Ahmed Khan",
-        notes: "Local jamaat for 3 days",
+        notes: "40-day khurooj to interior villages",
         status: "active"
     },
     {
@@ -135,20 +250,68 @@ let jamaats = [
         startDate: "2026-01-01",
         endDate: "2026-02-10",
         masjidId: 1,
-        members: ["Sajida",
-            "Talha",
-            "Hafsa",
-            "Maaz",
-            "Aqsa",
-            "Junaid",
-            "Zainab",
-            "Ilyas",
-            "Ruqayyah"],
+        members: ["Sajida", "Talha", "Hafsa", "Maaz", "Aqsa", "Junaid", "Zainab", "Ilyas", "Ruqayyah"],
         amir: "Abdul Rahman",
-        notes: "40 days khurooj to neighboring city",
+        notes: "40-day khurooj to neighboring city",
+        status: "upcoming"
+    },
+    {
+        id: 6,
+        duration: 10,
+        startDate: "2026-03-15",
+        endDate: "2026-03-25",
+        masjidId: 5,
+        members: ["Tariq", "Layla", "Rashid", "Nusaiba", "Zara"],
+        amir: "Imran Siddiqi",
+        notes: "10-day jamaat focusing on youth dawah",
+        status: "upcoming"
+    },
+    {
+        id: 7,
+        duration: 3,
+        startDate: "2024-11-10",
+        endDate: "2024-11-13",
+        masjidId: 6,
+        members: ["Asma", "Hamza", "Faris", "Lubna", "Zunairah"],
+        amir: "Saeed Ahmed",
+        notes: "3-day weekend jamaat",
+        status: "completed"
+    },
+    {
+        id: 8,
+        duration: 7,
+        startDate: "2025-05-01",
+        endDate: "2025-05-08",
+        masjidId: 7,
+        members: ["Zohra", "Usman", "Tamim", "Rafi", "Jameela", "Sana"],
+        amir: "Yahya Moin",
+        notes: "7-day jamaat to nearby taluks",
+        status: "completed"
+    },
+    {
+        id: 9,
+        duration: 4,
+        startDate: "2025-12-20",
+        endDate: "2025-12-24",
+        masjidId: 8,
+        members: ["Rayyan", "Mariam", "Huzayfa", "Iqra", "Nabeel"],
+        amir: "Naeem Akhtar",
+        notes: "Winter break special jamaat",
+        status: "upcoming"
+    },
+    {
+        id: 10,
+        duration: 20,
+        startDate: "2026-04-01",
+        endDate: "2026-04-21",
+        masjidId: 9,
+        members: ["Hina", "Jawad", "Tasneem", "Kashif", "Shaista", "Adnan"],
+        amir: "Shabbir Hussain",
+        notes: "20-day khurooj with regional focus",
         status: "upcoming"
     }
 ];
+
 
 let amaal = {
     fajrTaaleem: [
